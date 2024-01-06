@@ -137,7 +137,11 @@
 #include <ccomplex>
 #include <cfenv>
 #include <cinttypes>
+#if STD_VERSION_OF_BITS_STDCXX >= 202002L
+#include <stdalign.h> // cstdalign is removed in C++20. use stdalign.h instead.
+#else
 #include <cstdalign>
+#endif
 #include <cstdbool>
 #include <cstdint>
 #include <ctgmath>
@@ -223,14 +227,20 @@
 #include <numbers>
 #include <ranges>
 #include <span>
+// in apple clang, <stop_token> and <syncstream> are not supported.
+#if __has_include(<stop_token>)
 #include <stop_token>
+#endif
 #include <semaphore>
 #include <source_location>
+#if __has_include(<syncstream>)
 #include <syncstream>
+#endif
 #include <version>
 #endif
 
-#if STD_VERSION_OF_BITS_STDCXX > 202002L
+// for C++23
+#if STD_VERSION_OF_BITS_STDCXX >= 202302L
 #include <expected>
 #include <generator>
 #include <spanstream>
