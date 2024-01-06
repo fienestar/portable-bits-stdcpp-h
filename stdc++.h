@@ -29,6 +29,16 @@
 // 17.4.1.2 Headers
 
 // C
+
+// in msvc, __cplusplus is defined as 199711L
+// if there is no `/Zc:__cplusplus` option.
+// so _MSVC_LANG is used instead(if defined)
+#ifdef _MSVC_LANG
+#define STD_VERSION_OF_BITS_STDCXX _MSVC_LANG
+#else
+#define STD_VERSION_OF_BITS_STDCXX __cplusplus
+#endif
+
 #ifndef _GLIBCXX_NO_ASSERT
 #include <cassert>
 #endif
@@ -41,7 +51,7 @@
 #include <cstddef>
 #include <cstdlib>
 
-#if __cplusplus >= 201103L
+#if STD_VERSION_OF_BITS_STDCXX >= 201103L
 #include <cstdint>
 #endif
 
@@ -59,7 +69,7 @@
 #include <typeinfo>
 #include <utility>
 
-#if __cplusplus >= 201103L
+#if STD_VERSION_OF_BITS_STDCXX >= 201103L
 #include <array>
 #include <atomic>
 #include <initializer_list>
@@ -70,10 +80,10 @@
 #include <type_traits>
 #endif
 
-#if __cplusplus >= 201402L
+#if STD_VERSION_OF_BITS_STDCXX >= 201402L
 #endif
 
-#if __cplusplus >= 201703L
+#if STD_VERSION_OF_BITS_STDCXX >= 201703L
 #include <any>
 // #include <execution>
 #include <optional>
@@ -81,7 +91,7 @@
 #include <string_view>
 #endif
 
-#if __cplusplus >= 202002L
+#if STD_VERSION_OF_BITS_STDCXX >= 202002L
 #include <bit>
 #include <compare>
 #include <concepts>
@@ -92,7 +102,7 @@
 #include <version>
 #endif
 
-#if __cplusplus > 202002L
+#if STD_VERSION_OF_BITS_STDCXX > 202002L
 #include <expected>
 #include <stdatomic.h>
 #if __cpp_impl_coroutine
@@ -100,7 +110,7 @@
 #endif
 #endif
 
-#if _GLIBCXX_HOSTED
+#if 1 // _GLIBCXX_HOSTED
 // C
 #ifndef _GLIBCXX_NO_ASSERT
 #include <cassert>
@@ -123,7 +133,7 @@
 #include <cwchar>
 #include <cwctype>
 
-#if __cplusplus >= 201103L
+#if STD_VERSION_OF_BITS_STDCXX >= 201103L
 #include <ccomplex>
 #include <cfenv>
 #include <cinttypes>
@@ -166,7 +176,7 @@
 #include <valarray>
 #include <vector>
 
-#if __cplusplus >= 201103L
+#if STD_VERSION_OF_BITS_STDCXX >= 201103L
 #include <array>
 #include <atomic>
 #include <chrono>
@@ -189,11 +199,11 @@
 #include <unordered_set>
 #endif
 
-#if __cplusplus >= 201402L
+#if STD_VERSION_OF_BITS_STDCXX >= 201402L
 #include <shared_mutex>
 #endif
 
-#if __cplusplus >= 201703L
+#if STD_VERSION_OF_BITS_STDCXX >= 201703L
 #include <any>
 #include <charconv>
 // #include <execution>
@@ -203,7 +213,7 @@
 #include <variant>
 #endif
 
-#if __cplusplus >= 202002L
+#if STD_VERSION_OF_BITS_STDCXX >= 202002L
 #include <barrier>
 #include <bit>
 #include <compare>
@@ -220,7 +230,7 @@
 #include <version>
 #endif
 
-#if __cplusplus > 202002L
+#if STD_VERSION_OF_BITS_STDCXX > 202002L
 #include <expected>
 #include <generator>
 #include <spanstream>
