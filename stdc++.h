@@ -137,8 +137,9 @@
 #include <ccomplex>
 #include <cfenv>
 #include <cinttypes>
-#if STD_VERSION_OF_BITS_STDCXX >= 202002L
+#if STD_VERSION_OF_BITS_STDCXX >= 202002L || !__has_include(<stdalign.h>)
 #include <stdalign.h> // cstdalign is removed in C++20. use stdalign.h instead.
+// in apple clang, <cstdalign> is not supported.
 #else
 #include <cstdalign>
 #endif
